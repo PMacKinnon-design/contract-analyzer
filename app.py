@@ -46,10 +46,11 @@ if uploaded_file:
                 for category, row in summary.iterrows():
                     if row['Action Needed'] == "Yes":
                         prompt = f"Provide recommendations to improve contract coverage for the procurement category '{category}' with {row['% Uncontracted']:.1f}% of spend uncontracted and total spend of ${row['Total Spend']:,.0f}."
-                        response = openai.ChatCompletion.create(
-                            model="gpt-4",
-                            messages=[{"role": "user", "content": prompt}]
-                        )
+                       client = openai.OpenAI(api_key=openai_api_key)
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": prompt}]
+)
                         st.markdown(f"**{category}:** {response.choices[0].message['content']}")
 
     except Exception as e:
