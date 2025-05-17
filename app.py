@@ -47,6 +47,7 @@ if uploaded_file:
                     if row['Action Needed'] == "Yes":
                         prompt = f"Provide recommendations to improve contract coverage for the procurement category '{category}' with {row['% Uncontracted']:.1f}% of spend uncontracted and total spend of ${row['Total Spend']:,.0f}."
                        client = openai.OpenAI(api_key=openai_api_key)
+client = openai.OpenAI(api_key=openai_api_key)
 response = client.chat.completions.create(
     model="gpt-4",
     messages=[{"role": "user", "content": prompt}]
